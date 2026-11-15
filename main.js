@@ -207,6 +207,14 @@
   });
 
   /* ---------- award ---------- */
+  const ring = document.querySelector(".award__ring");
+  if (ring) {
+    const len = ring.getTotalLength();
+    gsap.fromTo(ring, { strokeDasharray: len, strokeDashoffset: len }, {
+      strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut", delay: .2,
+      scrollTrigger: { trigger: ".award__card", start: "top 80%" }
+    });
+  }
   gsap.from(".award", {
     y: 80, autoAlpha: 0, duration: 1.3, ease: "expo.out",
     scrollTrigger: { trigger: ".award", start: "top 85%" }
