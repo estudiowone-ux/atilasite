@@ -219,7 +219,7 @@ body::after {
   border-radius: calc(var(--radius) + 6px); background: linear-gradient(135deg, #0f201d, #0b1216 60%); border: 1px solid rgba(4,195,143,.22);
 }
 .award__media { position: relative; min-height: 420px; overflow: hidden; }
-.award__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 45% 50%; }
+.award__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; }
 .award__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 50%, #0e1d1b); }
 .award__body { position: relative; padding: clamp(32px, 5vw, 64px); display: flex; flex-direction: column; justify-content: center; }
 .award__title { font-size: clamp(28px, 3.4vw, 46px); line-height: 1.08; margin-bottom: 18px; }
