@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sinal perdido | Átila Siqueira</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#070a0d">
+  <link rel="icon" id="fav" type="image/png" sizes="32x32" href="/atilasite/favicon-32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#070a0d; --text:#eef3f1; --muted:#8d9a97; --green:#04c38f; --red:#ff5d6c; --line:rgba(255,255,255,.09); --ease:cubic-bezier(.22,1,.36,1); }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 400 16px/1.6 "Inter", system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    canvas { position: fixed; inset: 0; width: 100%; height: 100%; touch-action: none; }
+    .grid { position: fixed; inset: 0; pointer-events: none; opacity: .5;
+      background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 64px 64px; mask: radial-gradient(ellipse at center, #000 30%, transparent 75%); -webkit-mask: radial-gradient(ellipse at center, #000 30%, transparent 75%); }
+    .top { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 22px clamp(16px, 5vw, 64px); z-index: 2; }
+    .top img { width: 150px; height: auto; }
+    .hud { font: 500 11px/1 "JetBrains Mono", monospace; letter-spacing: .18em; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+    .hud i { width: 8px; height: 8px; border-radius: 50%; background: var(--red); box-shadow: 0 0 12px var(--red); transition: background .4s, box-shadow .4s; }
+    body.alive .hud i { background: var(--green); box-shadow: 0 0 12px var(--green); }
+    main { position: relative; z-index: 2; height: 100%; display: grid; place-items: center; text-align: center; padding: 90px 16px 60px; pointer-events: none; }
+    .wrap { max-width: 640px; pointer-events: none; }
+    .code { font: 700 clamp(110px, 24vw, 280px)/.85 "Sora", sans-serif; letter-spacing: -.06em; margin: 0;
+      color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.18); transition: -webkit-text-stroke-color .6s; user-select: none; }
+    body.alive .code { -webkit-text-stroke-color: rgba(4,195,143,.55); }
+    h1 { font: 600 clamp(28px, 4.4vw, 48px)/1.08 "Sora", sans-serif; letter-spacing: -.03em; margin: 18px 0 14px; }
+    h1 em { font-style: normal; color: var(--red); transition: color .6s; }
+    body.alive h1 em { color: var(--green); }
+    p { margin: 0 auto; color: var(--muted); max-width: 500px; font-size: clamp(15px, 1.3vw, 17px); }
+    .hint { margin-top: 26px; font: 500 11px/1.4 "JetBrains Mono", monospace; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+    .meter { width: 220px; height: 3px; margin: 12px auto 0; border-radius: 3px; background: var(--line); overflow: hidden; }
+    .meter span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--red), var(--green)); }
+    .ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 30px; pointer-events: auto; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 26px; border-radius: 999px; font: 600 15px/1 "Inter", sans-serif;
+      border: 1px solid rgba(255,255,255,.22); transition: background .4s var(--ease), color .4s var(--ease), border-color .4s, box-shadow .6s, transform .4s var(--ease); }
+    .btn:hover { transform: translateY(-2px); border-color: #fff; }
+    .btn--main { background: var(--green); border-color: var(--green); color: #00140d; }
+    body.alive .btn--main { box-shadow: 0 0 0 6px rgba(4,195,143,.15), 0 0 40px rgba(4,195,143,.5); }
+    .btn svg { width: 18px; height: 18px; }
+    @media (max-width: 560px) { .top img { width: 120px; } .hud span { display: none; } .btn { width: 100%; justify-content: center; } }
+  </style>
+</head>
+<body>
+  <canvas aria-hidden="true"></canvas>
+  <div class="grid" aria-hidden="true"></div>
+
+  <header class="top">
+    <a class="home" href="/atilasite/" aria-label="Átila Siqueira — início"><img class="logo" src="/atilasite/assets/logo-white.webp" alt="Átila Siqueira" width="1000" height="231"></a>
+    <div class="hud" aria-live="polite"><i></i><span class="status">ERRO 404 · SINAL PERDIDO</span></div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <p class="code" aria-hidden="true">404</p>
+      <h1>Esta página saiu <em class="state">da frequência.</em></h1>
+      <p class="msg">O endereço que você tentou acessar não existe ou mudou de lugar. Mas no crescimento não tem beco sem saída — vamos te colocar de volta no caminho.</p>
+      <div class="hint"><span class="hint__txt">Mova o mouse para reanimar o sinal</span><div class="meter"><span></span></div></div>
+      <div class="ctas">
+        <a class="btn btn--main home" href="/atilasite/">Voltar ao início
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn wa" href="https://wa.me/5511942429283" target="_blank" rel="noopener">Falar com o Átila</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+  (() => {
+    // works on GitHub Pages project path (/atilasite/) and on a custom domain (/)
+    const base = location.pathname.startsWith("/atilasite") ? "/atilasite/" : "/";
+    document.querySelectorAll(".home").forEach((a) => (a.href = base));
+    document.querySelector(".logo").src = base + "assets/logo-white.webp";
+    document.getElementById("fav").href = base + "favicon-32.png";
+    document.querySelector(".wa").href = "https://wa.me/5511942429283?text=" + encodeURIComponent("Olá, Átila! Vim pelo site e quero dar o próximo passo.");
+
+    const touch = matchMedia("(hover: none)").matches;
+    const hintTxt = document.querySelector(".hint__txt");
+    hintTxt.textContent = touch ? "Arraste o dedo para reanimar o sinal" : "Mova o mouse para reanimar o sinal";
+
+    const c = document.querySelector("canvas"), ctx = c.getContext("2d");
+    const codeEl = document.querySelector(".code");
+    const meter = document.querySelector(".meter span");
+    const status = document.querySelector(".status"), state = document.querySelector(".state"), msg = document.querySelector(".msg");
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let W, H, dpr, buf = [], energy = 0, life = 0, alive = false, beatPos = -1, nextBeat = 0;
+    const STEP = 3;
+    const BEAT = [0, -2, -4, -2, 0, 0, 3, -6, -34, 40, -14, 0, 0, 0, -4, -9, -11, -9, -4, 0];
+
+    const resize = () => {
+      dpr = Math.min(devicePixelRatio || 1, 2);
+      W = innerWidth; H = innerHeight;
+      c.width = W * dpr; c.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = Math.ceil(W / STEP) + 1;
+      buf = Array.from({ length: n }, (_, i) => buf[i] || 0);
+    };
+    resize(); addEventListener("resize", resize);
+
+    let last = null;
+    const feed = (x, y) => {
+      if (last) energy = Math.min(1, energy + Math.hypot(x - last.x, y - last.y) / 900);
+      last = { x, y };
+    };
+    addEventListener("pointermove", (e) => feed(e.clientX, e.clientY), { passive: true });
+    addEventListener("touchmove", (e) => feed(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+
+    const setAlive = (v) => {
+      if (v === alive) return;
+      alive = v; document.body.classList.toggle("alive", v);
+      status.textContent = v ? "SINAL RECUPERADO · 200 OK" : "ERRO 404 · SINAL PERDIDO";
+      state.textContent = v ? "de volta à frequência." : "da frequência.";
+      hintTxt.textContent = v ? "Sinal estável. Bora voltar?" : (touch ? "Arraste o dedo para reanimar o sinal" : "Mova o mouse para reanimar o sinal");
+    };
+
+    const frame = (t) => {
+      energy *= 0.985;
+      life += (energy - life) * 0.04;
+      if (life > 0.55) setAlive(true);
+      if (life < 0.12 && alive) setAlive(false);
+      meter.style.width = Math.min(100, life / 0.55 * 100) + "%";
+
+      // new sample at the right edge: flatline + tiny noise, or a heartbeat when there's energy
+      const amp = 0.25 + life * 2.2;
+      let s = (Math.random() - .5) * 1.4;
+      if (beatPos >= 0) { s += BEAT[beatPos] * amp; beatPos++; if (beatPos >= BEAT.length) beatPos = -1; }
+      else if (t > nextBeat && life > 0.08) { beatPos = 0; nextBeat = t + 1400 - life * 800; }
+      buf.push(s); buf.shift();
+
+      ctx.clearRect(0, 0, W, H);
+      const r = codeEl.getBoundingClientRect(); // monitor line runs through the "404"
+      const mid = r.height ? r.top + r.height * .55 : H * .3;
+      const col = alive ? "4,195,143" : (life > .15 ? "180,170,120" : "255,93,108");
+      const g = ctx.createLinearGradient(0, 0, W, 0);
+      g.addColorStop(0, `rgba(${col},0)`); g.addColorStop(.7, `rgba(${col},.55)`); g.addColorStop(1, `rgba(${col},1)`);
+      ctx.strokeStyle = g; ctx.lineWidth = 2; ctx.lineJoin = "round";
+      ctx.shadowColor = `rgba(${col},.8)`; ctx.shadowBlur = 12;
+      ctx.beginPath();
+      buf.forEach((v, i) => (i ? ctx.lineTo(i * STEP, mid + v) : ctx.moveTo(0, mid + v)));
+      ctx.stroke();
+      const hx = (buf.length - 1) * STEP, hy = mid + buf[buf.length - 1];
+      ctx.fillStyle = `rgb(${col})`; ctx.beginPath(); ctx.arc(hx - 4, hy, 4, 0, Math.PI * 2); ctx.fill();
+      ctx.shadowBlur = 0;
+      if (!reduce) requestAnimationFrame(frame);
+    };
+    requestAnimationFrame(frame);
+  })();
+  </script>
+</body>
+</html>
