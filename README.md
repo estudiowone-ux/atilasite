@@ -6,7 +6,7 @@ Landing page de Átila Siqueira + mini LP da **Frequência Empresarial**.
 - `/` — site principal · `/frequencia/` — Frequência Empresarial · `404.html` — página de erro
 - `termos.html` e `privacidade.html` — páginas legais (LGPD)
 
-Publicado via GitHub Pages: https://mikedaysti.github.io/atilasite/
+Publicado via GitHub Pages: https://estudiowone-ux.github.io/atilasite/
 
 Rodar local:
 
