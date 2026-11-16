@@ -233,11 +233,17 @@ body::after {
 .timeline li { display: grid; grid-template-columns: 170px 1fr; gap: 24px; padding: 26px 0; border-bottom: 1px solid var(--line); }
 .timeline__k { font: 600 15px/1.4 var(--f-head); color: var(--green); }
 .timeline p { margin: 0; color: #aeb9b6; }
+.timeline__feat { position: relative; margin: 0 -20px; padding-left: 20px !important; padding-right: 20px !important; background: linear-gradient(90deg, rgba(4,195,143,.09), rgba(4,195,143,0) 85%); box-shadow: inset 2px 0 0 var(--green); }
+.timeline__feat .timeline__k { font-size: 17px; }
+.timeline__feat .timeline__k em { display: table; margin-top: 8px; font: 600 10px/1 var(--f-body); letter-spacing: .14em; text-transform: uppercase; font-style: normal; color: #06120f; background: var(--green); padding: 5px 8px; border-radius: 99px; }
+.timeline__feat p { color: #d6dfdc; }
+.about__motto { margin: 22px 0 0; font: 600 clamp(18px, 1.6vw, 22px)/1.4 var(--f-head); color: var(--green); letter-spacing: -.01em; }
 @media (max-width: 900px) {
   .about__grid { grid-template-columns: 1fr; }
   .about__visual { position: relative; top: 0; max-width: 460px; }
   .about__icon { right: 12px; width: 70px; }
   .timeline li { grid-template-columns: 1fr; gap: 6px; }
+  .timeline__feat { margin: 0 -14px; padding-left: 14px !important; padding-right: 14px !important; }
 }
 
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: clamp(80px, 10vw, 140px); border-top: 1px solid var(--line); }
