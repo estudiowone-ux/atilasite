@@ -1,3 +1,7 @@
+/* metric-matched fallbacks: the swap to the web fonts doesn't move the layout (CLS) */
+@font-face { font-family: "Sora Fallback"; src: local("Arial"), local("ArialMT"), local("Liberation Sans"), local("Arimo"), local("Helvetica"), local("Roboto"); font-weight: 100 449; size-adjust: 111.7%; ascent-override: 86.8%; descent-override: 26%; line-gap-override: 0%; }
+@font-face { font-family: "Sora Fallback"; src: local("Arial"), local("ArialMT"), local("Liberation Sans"), local("Arimo"), local("Helvetica"), local("Roboto"); font-weight: 450 900; size-adjust: 106.8%; ascent-override: 90.8%; descent-override: 27.2%; line-gap-override: 0%; }
+@font-face { font-family: "Inter Fallback"; src: local("Arial"), local("ArialMT"), local("Liberation Sans"), local("Arimo"), local("Helvetica"), local("Roboto"); size-adjust: 106.3%; ascent-override: 91.2%; descent-override: 22.6%; line-gap-override: 0%; }
 :root {
   --bg: #070a0d;
   --bg-2: #0c1216;
@@ -12,8 +16,8 @@
   --pad: clamp(16px, 5vw, 64px);
   --wrap: 1320px;
   --ease: cubic-bezier(.22, 1, .36, 1);
-  --f-head: "Sora", system-ui, sans-serif;
-  --f-body: "Inter", system-ui, sans-serif;
+  --f-head: "Sora", "Sora Fallback", system-ui, sans-serif;
+  --f-body: "Inter", "Inter Fallback", system-ui, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
