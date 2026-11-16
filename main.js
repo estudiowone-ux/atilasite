@@ -225,10 +225,6 @@
     y: 80, autoAlpha: 0, duration: 1.3, ease: "expo.out",
     scrollTrigger: { trigger: ".award", start: "top 85%" }
   });
-  gsap.fromTo(".award__media img", { scale: 1.25 }, {
-    scale: 1, ease: "none",
-    scrollTrigger: { trigger: ".award", start: "top bottom", end: "bottom top", scrub: true }
-  });
 
   /* ---------- stacked module cards ---------- */
   const cards = gsap.utils.toArray(".stack .card");
