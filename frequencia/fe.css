@@ -278,7 +278,7 @@ input[type=range]:focus-visible { outline: 2px solid var(--blue); outline-offset
   .symptoms, .steps { grid-template-columns: 1fr; }
   .hero__ctas .btn { width: 100%; }
   .host__stats { grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-  .host__stats b { font-size: 24px; }
+  .host__stats b { font-size: clamp(19px, 6vw, 24px); white-space: nowrap; }
   .radar__labels text { font-size: 12.5px; }
 }
 
