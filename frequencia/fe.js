@@ -274,13 +274,18 @@
 
   /* ---------- intro ---------- */
   $$(".hero__title .line").forEach((l) => { l.innerHTML = `<span>${l.innerHTML}</span>`; });
-  gsap.timeline({ defaults: { ease: "expo.out" } })
+  // hold the hero until web fonts arrive (max 1.2s) so the font swap can't shift visible text (CLS)
+  gsap.set(".hero__content", { autoAlpha: 0 });
+  const heroIntro = gsap.timeline({ paused: true, defaults: { ease: "expo.out" } })
+    .set(".hero__content", { autoAlpha: 1 }, 0)
     .from(".hero__waves", { autoAlpha: 0, duration: 2 }, 0)
     .from(".hero__eyebrow", { y: 20, autoAlpha: 0, duration: 1 }, .2)
     .from(".hero__title .line > span", { yPercent: 110, duration: 1.3, stagger: .1 }, .25)
     .from(".hero__sub", { y: 24, autoAlpha: 0, duration: 1.1 }, .7)
     .from(".hero__ctas .btn", { y: 24, autoAlpha: 0, duration: 1, stagger: .08 }, .8)
     .from(".hud span", { autoAlpha: 0, duration: .8, stagger: .08 }, 1);
+  Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise((r) => setTimeout(r, 1200))])
+    .then(() => heroIntro.play());
 
   gsap.to(".hero__content", { yPercent: -18, autoAlpha: .2, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
 

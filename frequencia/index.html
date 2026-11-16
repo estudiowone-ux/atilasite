@@ -24,7 +24,8 @@
   <link rel="icon" type="image/svg+xml" href="assets/fe-icon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
   <link rel="stylesheet" href="fe.css">
 </head>
 <body>
@@ -55,7 +56,7 @@
       <a href="#como">Como funciona</a>
       <a href="#formatos">Formatos</a>
     </nav>
-    <a class="btn btn--sm magnetic" data-wa href="#">
+    <a class="btn btn--sm magnetic" data-wa href="#" aria-label="Entrar na lista de espera pelo WhatsApp">
       <svg class="ico"><use href="#i-wa"/></svg><span>Lista de espera</span>
     </a>
   </header>
@@ -216,7 +217,7 @@
     <!-- QUEM CONDUZ -->
     <section class="host">
       <div class="container host__grid">
-        <figure class="host__img reveal-img"><img src="../assets/retrato.webp" alt="Átila Siqueira" loading="lazy"></figure>
+        <figure class="host__img reveal-img"><img src="../assets/retrato.webp" srcset="../assets/retrato-560.webp 560w, ../assets/retrato-800.webp 800w, ../assets/retrato.webp 1100w" sizes="(max-width: 900px) 92vw, 520px" alt="Átila Siqueira" loading="lazy" width="1100" height="1606"></figure>
         <div class="host__text">
           <p class="eyebrow"><span class="pulse-dot"></span>Quem conduz</p>
           <h2 class="title reveal">Átila Siqueira</h2>

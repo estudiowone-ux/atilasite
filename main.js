@@ -25,7 +25,7 @@
   const track = document.querySelector(".clients__track");
   if (track) {
     const html = CLIENTS.map(
-      (c) => `<div class="clients__logo"><img src="assets/clientes/${c}.webp" alt="" loading="lazy"></div>`
+      (c) => `<div class="clients__logo"><img src="assets/clientes/${c}.webp" alt="" loading="lazy" width="126" height="60"></div>`
     ).join("");
     track.innerHTML = html + html;
   }
@@ -104,16 +104,22 @@
   /* ---------- loader ---------- */
   const count = { v: 0 };
   const countEl = document.querySelector(".loader__count");
-  const tlLoad = gsap.timeline({ onComplete: intro });
-  tlLoad
-    .to(".loader__icon", { autoAlpha: 1, scale: 1, duration: .8, ease: "expo.out" })
-    .to(count, {
-      v: 100, duration: 1.4, ease: "power2.inOut",
-      onUpdate: () => (countEl.textContent = String(Math.round(count.v)).padStart(3, "0"))
-    }, 0)
-    .to(".loader__bar span", { width: "100%", duration: 1.4, ease: "power2.inOut" }, 0)
-    .to(".loader__inner", { y: -30, autoAlpha: 0, duration: .5, ease: "power2.in" })
-    .to(".loader", { clipPath: "inset(0 0 100% 0)", duration: .9, ease: "expo.inOut" }, "-=.1");
+  // full loader only on the first page view of the session; repeat views go straight to the intro
+  let seen = false;
+  try { seen = sessionStorage.getItem("atila-intro") === "1"; sessionStorage.setItem("atila-intro", "1"); } catch (e) {}
+  if (seen) {
+    gsap.to(".loader", { autoAlpha: 0, duration: .35, ease: "power1.out", onComplete: intro });
+  } else {
+    gsap.timeline({ onComplete: intro })
+      .to(".loader__icon", { autoAlpha: 1, scale: 1, duration: .6, ease: "expo.out" })
+      .to(count, {
+        v: 100, duration: 1, ease: "power2.inOut",
+        onUpdate: () => (countEl.textContent = String(Math.round(count.v)).padStart(3, "0"))
+      }, 0)
+      .to(".loader__bar span", { width: "100%", duration: 1, ease: "power2.inOut" }, 0)
+      .to(".loader__inner", { y: -30, autoAlpha: 0, duration: .4, ease: "power2.in" })
+      .to(".loader", { clipPath: "inset(0 0 100% 0)", duration: .75, ease: "expo.inOut" }, "-=.1");
+  }
 
   function intro() {
     loader.remove();
