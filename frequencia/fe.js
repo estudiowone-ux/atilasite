@@ -103,9 +103,9 @@
     for (let l = 0; l < LINES; l++) {
       const k = l / (LINES - 1);
       const grad = ctx.createLinearGradient(0, 0, W, 0);
-      grad.addColorStop(0, "rgba(63,169,255,0)");
-      grad.addColorStop(.5, `rgba(${Math.round(63 + 80 * k)},${Math.round(169 + 58 * k)},255,${.15 + .5 * (1 - Math.abs(k - .5) * 2)})`);
-      grad.addColorStop(1, "rgba(143,227,255,0)");
+      grad.addColorStop(0, "rgba(197,216,75,0)");
+      grad.addColorStop(.5, `rgba(${Math.round(197 + 40 * k)},${Math.round(216 + 24 * k)},${Math.round(75 + 80 * k)},${.15 + .5 * (1 - Math.abs(k - .5) * 2)})`);
+      grad.addColorStop(1, "rgba(237,240,155,0)");
       ctx.strokeStyle = grad;
       ctx.lineWidth = l === 3 ? 2.2 : 1;
       ctx.beginPath();
@@ -148,7 +148,7 @@
       d += (i ? "L" : "M") + x.toFixed(1) + " " + y.toFixed(1);
     }
     noisePath.setAttribute("d", d);
-    const c = lerpColor("ff5d6c", "3fa9ff", clean);
+    const c = lerpColor("ff5d6c", "c5d84b", clean);
     noisePath.style.stroke = c;
     noisePath.style.color = c;
   };
