@@ -47,12 +47,11 @@ body::after {
 }
 
 /* ---------- brand ---------- */
-.brand { display: inline-flex; align-items: center; gap: 12px; color: var(--blue); }
-.brand__icon { width: 34px; height: 42px; }
-.brand__word { display: flex; flex-direction: column; line-height: 1; }
-.brand__word b { font: 700 17px/1 var(--f-head); color: #fff; letter-spacing: .01em; }
-.brand__word small { font: 300 9.5px/1 var(--f-head); letter-spacing: .52em; margin-top: 5px; color: var(--blue); }
-.brand--sm .brand__icon { width: 30px; height: 37px; }
+.brand { display: inline-flex; align-items: center; gap: 12px; color: var(--text); }
+.brand__icon { width: 44px; height: 38px; flex: none; }
+.brand__word { display: flex; flex-direction: column; line-height: 1.05; padding-left: 12px; border-left: 2px solid var(--blue); }
+.brand__word b { font: 600 15.5px/1.08 var(--f-head); color: var(--text); letter-spacing: -.005em; }
+.brand--sm .brand__icon { width: 38px; height: 33px; }
 
 /* ---------- buttons ---------- */
 .btn {
@@ -229,7 +228,7 @@ input[type=range]:focus-visible { outline: 2px solid var(--blue); outline-offset
 .cta__wave { position: absolute; left: 0; top: 50%; width: 100%; height: 300px; transform: translateY(-50%); opacity: .5; }
 .cta__wave path { fill: none; stroke: var(--blue); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
 .cta__inner { position: relative; display: flex; flex-direction: column; align-items: center; }
-.cta__icon { width: 70px; height: 86px; color: var(--blue); margin-bottom: 30px; filter: drop-shadow(0 0 24px rgba(197, 216, 75, .6)); }
+.cta__icon { width: 92px; height: 80px; color: var(--text); margin-bottom: 30px; }
 .cta__title { font-size: clamp(48px, 9vw, 140px); line-height: .95; letter-spacing: -.04em; }
 .cta p { max-width: 520px; margin: 26px auto 38px; color: var(--muted); font-size: 17px; }
 
